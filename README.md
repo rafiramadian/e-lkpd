@@ -1,228 +1,173 @@
-# E-LKPD Inquiry Learning
+# E-LKPD - E-Lembar Kerja Peserta Didik
 
-Platform pembelajaran berbasis Inquiry Learning untuk mata pelajaran Pemrograman Dasar yang dirancang untuk meningkatkan hasil belajar siswa.
+Platform pembelajaran berbasis Inquiry Learning untuk mata pelajaran Pemrograman Dasar. Tingkatkan hasil belajar dengan metode yang interaktif dan efektif.
 
-## 📋 Deskripsi Proyek
+## 🎯 Tujuan
 
-E-LKPD (E-Lembar Kerja Peserta Didik) adalah aplikasi web yang mengimplementasikan metode Inquiry Learning dalam pembelajaran pemrograman dasar. Platform ini dirancang untuk memberikan pengalaman belajar yang interaktif dan efektif dengan berbagai fitur yang mendukung proses pembelajaran.
+RANCANG BANGUN E-LEMBAR KERJA PESERTA DIDIK BERBASIS CLOUD DENGAN METODE INQUIRY LEARNING PADA MATA PELAJARAN PEMROGRAMAN DASAR UNTUK MENINGKATKAN HASIL BELAJAR
 
-## 🎯 Fitur Utama
+## 🚀 Tech Stack
 
-### 👥 Authentication & User Management
-
-- Registrasi untuk siswa dan guru
-- Role-based login (siswa/guru)
-- Keamanan berbasis Supabase Auth
-
-### 🏠 Dashboard Pengguna
-
-- **Siswa**: Progress belajar, materi tersedia, tugas pending
-- **Guru**: Statistik siswa, manajemen materi, daftar kelas
-
-### 📚 Manajemen Materi Inquiry Learning
-
-- Pembuatan materi dengan tahapan Inquiry Learning
-- Dukungan teks, gambar, video
-- Penugasan materi ke kelas tertentu
-
-### 📝 E-LKPD Student Interface
-
-- Tugas berbasis inquiry dengan berbagai format
-- Auto-save saat mengerjakan
-- Petunjuk inquiry di setiap tahapan
-
-### 👨‍💻 Online Code Editor
-
-- Editor kode online untuk praktik langsung
-- Dukungan bahasa C, Python, JavaScript
-- Eksekusi kode dengan API Judge0
-
-### 🎯 Pre-Test & Post-Test
-
-- Evaluasi pembelajaran otomatis
-- Skor dan analisis hasil
-- Tracking peningkatan pemahaman
-
-### 💬 Forum Diskusi
-
-- Diskusi threaded antara siswa dan guru
-- Notifikasi real-time
-- Kategorisasi berdasarkan materi
-
-### 📊 Progress Tracking
-
-- Monitoring progress pembelajaran
-- Visualisasi kemajuan
-- Laporan komprehensif
-
-### ✉️ Feedback System
-
-- Feedback dari guru untuk tugas siswa
-- Sistem penilaian terintegrasi
-- Riwayat feedback
-
-### 📥 Export & Reporting
-
-- Export nilai dan progress ke Excel/CSV
-- Filter berdasarkan kelas/materi/siswa
-- Laporan akademik
-
-### ☁️ Cloud Storage
-
-- Penyimpanan file pendukung
-- Manajemen file terorganisir
-- Akses aman
-
-### 🌓 UI/UX Features
-
-- Light/Dark mode
-- Responsive design
-- Accessibility features
-
-## 🛠️ Teknologi yang Digunakan
-
-- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
-- **Backend**: Supabase (Database, Auth, Storage)
+- **Frontend**: Next.js 15, TypeScript, Tailwind CSS
+- **Backend**: Supabase (Auth, Database, Storage)
+- **Database**: PostgreSQL dengan Prisma ORM
+- **Animations**: Framer Motion
 - **UI Components**: Radix UI, Lucide React
-- **Form Handling**: React Hook Form, Zod
-- **Code Execution**: Judge0 API
-- **Deployment**: Vercel (recommended)
+- **Forms**: React Hook Form, Zod Validation
+- **Deployment**: Vercel
 
-## 🚀 Instalasi dan Setup
+## ✨ Features
+
+### Phase 1 ✅ (Completed)
+
+- [x] Landing page dengan responsive design
+- [x] Tailwind CSS v3 configuration
+- [x] Framer Motion animations
+- [x] UI components (Button, Card, Input)
+- [x] Prisma schema untuk database
+- [x] Supabase integration setup
+- [x] TypeScript types dan utilities
+- [x] Project structure dan documentation
+
+### Phase 2 🔄 (In Progress)
+
+- [ ] Authentication System (Supabase Auth)
+- [ ] Login/Register pages
+- [ ] Protected routes middleware
+- [ ] User context dan state management
+
+### Phase 3 📋 (Planned)
+
+- [ ] Dashboard untuk Guru dan Siswa
+- [ ] Material Management System
+- [ ] Inquiry Learning Workflow
+- [ ] Student Worksheet Interface
+
+### Phase 4 💻 (Planned)
+
+- [ ] Online Code Editor
+- [ ] Judge0 API Integration
+- [ ] Code Execution Environment
+- [ ] Programming Exercises
+
+### Phase 5 📊 (Planned)
+
+- [ ] Pre & Post Test System
+- [ ] Progress Tracking
+- [ ] Analytics Dashboard
+- [ ] Performance Reports
+
+### Phase 6 💬 (Planned)
+
+- [ ] Discussion Forum
+- [ ] Real-time Chat
+- [ ] File Sharing
+- [ ] Cloud Storage
+
+## 🛠️ Development
 
 ### Prerequisites
 
 - Node.js 18+
 - npm atau yarn
-- Akun Supabase
+- Git
 
-### 1. Clone Repository
+### Installation
 
 ```bash
+# Clone repository
 git clone <repository-url>
 cd e-lkpd
-```
 
-### 2. Install Dependencies
-
-```bash
+# Install dependencies
 npm install
-```
 
-### 3. Setup Environment Variables
+# Setup environment variables
+cp .env.example .env.local
+# Edit .env.local dengan Supabase credentials
 
-Buat file `.env.local` berdasarkan `env.example`:
+# Setup database
+npm run db:generate
+npm run db:push
 
-```bash
-cp env.example .env.local
-```
-
-Isi dengan konfigurasi Supabase Anda:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_APP_NAME=E-LKPD Inquiry Learning
-NEXT_PUBLIC_JUDGE0_API_URL=https://judge0-ce.p.rapidapi.com
-JUDGE0_API_KEY=your_judge0_api_key
-```
-
-### 4. Setup Supabase Database
-
-1. Buat project baru di [Supabase](https://supabase.com)
-2. Jalankan SQL script untuk membuat tabel (akan disediakan)
-3. Setup Row Level Security (RLS) policies
-4. Konfigurasi Storage buckets
-
-### 5. Run Development Server
-
-```bash
+# Run development server
 npm run dev
 ```
 
-Aplikasi akan berjalan di `http://localhost:3000`
+### Environment Variables
 
-## 📁 Struktur Proyek
+Buat file `.env.local` dengan variabel berikut:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Database
+DATABASE_URL=your_database_url
+
+# Judge0 API (untuk code editor)
+JUDGE0_API_URL=your_judge0_url
+JUDGE0_API_KEY=your_judge0_key
+```
+
+## 📁 Project Structure
 
 ```
-src/
-├── app/                    # Next.js App Router
-│   ├── auth/              # Authentication pages
-│   ├── dashboard/         # Dashboard pages
-│   ├── materials/         # Material management
-│   ├── assignments/       # Assignment pages
-│   └── admin/            # Admin pages
-├── components/            # React components
-│   ├── ui/               # Base UI components
-│   ├── auth/             # Authentication components
-│   ├── dashboard/        # Dashboard components
-│   ├── materials/        # Material components
-│   ├── assignments/      # Assignment components
-│   ├── code-editor/      # Code editor components
-│   ├── tests/            # Test components
-│   ├── discussions/      # Discussion components
-│   ├── progress/         # Progress tracking
-│   ├── feedback/         # Feedback components
-│   └── export/           # Export components
-├── lib/                  # Utility libraries
-│   ├── supabase/         # Supabase configuration
-│   ├── utils/            # Utility functions
-│   ├── types/            # TypeScript types
-│   └── hooks/            # Custom React hooks
-└── styles/               # Global styles
+e-lkpd/
+├── src/
+│   ├── app/                 # Next.js App Router
+│   ├── components/          # Reusable UI components
+│   │   └── ui/             # Base UI components
+│   ├── lib/                # Utilities and configurations
+│   │   ├── prisma.ts       # Database client
+│   │   ├── supabase/       # Supabase clients
+│   │   ├── types/          # TypeScript types
+│   │   └── utils.ts        # Utility functions
+│   └── styles/             # Global styles
+├── prisma/                 # Database schema and migrations
+├── public/                 # Static assets
+└── docs/                   # Documentation
 ```
+
+## 🎨 UI Components
+
+### Animated Components
+
+- `FadeIn` - Fade in animation
+- `SlideIn` - Slide animation
+- `ScaleIn` - Scale animation
+- `StaggerContainer` - Staggered animations
+- `HoverCard` - Hover card component
+- `AnimatedButton` - Button with animations
+
+### Base Components
+
+- `Button` - Customizable button component
+- `Card` - Card container component
+- `Input` - Form input component
 
 ## 🗄️ Database Schema
 
-### Tabel Utama
+### Core Entities
 
-- `users` - Data pengguna (siswa/guru)
-- `classes` - Data kelas
-- `materials` - Materi pembelajaran
-- `assignments` - Tugas siswa
-- `student_assignments` - Jawaban siswa
-- `tests` - Pre/Post test
-- `student_tests` - Hasil test siswa
-- `discussions` - Forum diskusi
-- `progress` - Progress tracking
-- `feedback` - Feedback guru
+- **User** - Authentication dan user profiles
+- **Class** - Kelas dan enrollment
+- **Material** - Materi pembelajaran
+- **Assignment** - Tugas dan worksheet
+- **Test** - Pre/Post test
+- **Discussion** - Forum diskusi
+- **Progress** - Progress tracking
+- **Feedback** - Feedback system
 
-## 🔧 Development
+## 🚀 Deployment
 
-### Scripts Available
-
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run start        # Production server
-npm run lint         # ESLint
-npm run type-check   # TypeScript check
-```
-
-### Code Style
-
-- Menggunakan ESLint dan Prettier
-- TypeScript strict mode
-- Tailwind CSS untuk styling
-- Component-based architecture
-
-## 🧪 Testing
-
-```bash
-npm run test         # Run tests
-npm run test:watch   # Watch mode
-npm run test:coverage # Coverage report
-```
-
-## 📦 Deployment
-
-### Vercel (Recommended)
+### Vercel Deployment
 
 1. Connect repository ke Vercel
-2. Setup environment variables
-3. Deploy otomatis
+2. Set environment variables di Vercel dashboard
+3. Deploy otomatis pada setiap push ke main branch
 
 ### Manual Deployment
 
@@ -231,33 +176,27 @@ npm run build
 npm run start
 ```
 
+## 📚 Documentation
+
+- [DATABASE_SETUP.md](./DATABASE_SETUP.md) - Database setup guide
+- [TODO.md](./TODO.md) - Development roadmap
+
 ## 🤝 Contributing
 
 1. Fork repository
-2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
-
-## 📝 TODO List
-
-Lihat file `TODO.md` untuk daftar lengkap fitur yang akan dikembangkan.
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
 ## 📄 License
 
-Proyek ini dibuat untuk keperluan skripsi. Tidak ada lisensi komersial.
+This project is created for thesis purposes.
 
 ## 👨‍💻 Author
 
-**Rafi Ramadian** - Mahasiswa yang mengembangkan E-LKPD untuk skripsi
-
-## 🙏 Acknowledgments
-
-- Supabase untuk backend services
-- Next.js team untuk framework
-- Tailwind CSS untuk styling
-- Judge0 untuk code execution API
+**Rafi Ramadian** - Skripsi Project 2024
 
 ---
 
-**Judul Skripsi**: RANCANG BANGUN E-LEMBAR KERJA PESERTA DIDIK BERBASIS CLOUD DENGAN METODE INQUIRY LEARNING PADA MATA PELAJARAN PEMROGRAMAN DASAR UNTUK MENINGKATKAN HASIL BELAJAR
+⭐ **Star this repository if you find it helpful!**
