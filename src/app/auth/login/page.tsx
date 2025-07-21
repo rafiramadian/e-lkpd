@@ -38,6 +38,16 @@ export default function LoginPage() {
       }
 
       if (data.user) {
+        // Check user's actual role from metadata
+        const userRole = data.user.user_metadata?.role;
+
+        if (userRole !== role) {
+          setError(
+            `Akun ini terdaftar sebagai ${userRole === 'teacher' ? 'Guru' : 'Siswa'}. Silakan pilih peran yang sesuai.`
+          );
+          return;
+        }
+
         // Redirect based on role
         router.push(role === 'student' ? '/dashboard/student' : '/dashboard/teacher');
       }

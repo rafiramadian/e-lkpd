@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -24,20 +25,24 @@ export default function Home() {
             <span className="text-xl font-bold text-gray-900">E-LKPD</span>
           </div>
           <div className="flex items-center space-x-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 text-gray-700 hover:text-gray-900"
-            >
-              Masuk
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Daftar
-            </motion.button>
+            <Link href="/auth/login">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-4 py-2 text-gray-700 hover:text-gray-900"
+              >
+                Masuk
+              </motion.button>
+            </Link>
+            <Link href="/auth/register">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Daftar
+              </motion.button>
+            </Link>
           </div>
         </nav>
       </motion.header>
@@ -56,20 +61,24 @@ export default function Home() {
             belajar dengan metode yang interaktif dan efektif.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-lg"
-            >
-              Mulai Belajar
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 text-lg"
-            >
-              Masuk ke Akun
-            </motion.button>
+            <Link href="/auth/register">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-lg"
+              >
+                Mulai Belajar
+              </motion.button>
+            </Link>
+            <Link href="/auth/login">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 text-lg"
+              >
+                Masuk ke Akun
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
 
@@ -156,13 +165,15 @@ export default function Home() {
             <p className="text-blue-100 mb-8 text-lg">
               Bergabunglah dengan platform E-LKPD dan rasakan perbedaan dalam pembelajaran pemrograman dasar.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 text-lg font-semibold"
-            >
-              Daftar Sekarang
-            </motion.button>
+            <Link href="/auth/register">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 text-lg font-semibold"
+              >
+                Daftar Sekarang
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </main>
