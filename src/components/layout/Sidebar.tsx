@@ -65,7 +65,7 @@ export default function Sidebar({ isOpen, onClose, userRole }: SidebarProps) {
 
       {/* Sidebar */}
       <div
-        className={`fixed md:relative inset-y-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-gray-200 ${
+        className={`fixed md:fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-gray-200 ${
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         } transition-transform duration-300 ease-in-out`}
       >

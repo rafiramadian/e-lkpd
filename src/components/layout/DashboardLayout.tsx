@@ -33,17 +33,17 @@ export default function DashboardLayout({ children, userRole }: DashboardLayoutP
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50">
       {/* Sidebar Component */}
       <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} userRole={userRole} />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="md:ml-64">
         {/* Header Component */}
         <Header onMenuClick={handleMenuClick} userRole={userRole} />
 
         {/* Page Content */}
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        <main className="p-6 min-h-screen bg-gray-50">{children}</main>
       </div>
     </div>
   );
