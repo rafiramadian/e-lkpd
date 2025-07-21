@@ -16,6 +16,12 @@ CREATE TYPE "QuestionType" AS ENUM ('multiple_choice', 'short_answer', 'essay', 
 -- CreateEnum
 CREATE TYPE "TestType" AS ENUM ('pre_test', 'post_test');
 
+-- CreateEnum
+CREATE TYPE "MaterialAccessLevel" AS ENUM ('public', 'private', 'class_only');
+
+-- CreateEnum
+CREATE TYPE "FileType" AS ENUM ('image', 'video', 'pdf', 'document', 'code', 'other');
+
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
@@ -43,16 +49,77 @@ CREATE TABLE "classes" (
 );
 
 -- CreateTable
+CREATE TABLE "material_categories" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "color" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "material_categories_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "materials" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "class_id" TEXT NOT NULL,
     "teacher_id" TEXT NOT NULL,
+    "category_id" TEXT,
+    "permission" "MaterialAccessLevel" NOT NULL DEFAULT 'class_only',
+    "is_published" BOOLEAN NOT NULL DEFAULT false,
+    "version" INTEGER NOT NULL DEFAULT 1,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "materials_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "material_files" (
+    "id" TEXT NOT NULL,
+    "material_id" TEXT NOT NULL,
+    "file_name" TEXT NOT NULL,
+    "original_name" TEXT NOT NULL,
+    "file_url" TEXT NOT NULL,
+    "fileType" "FileType" NOT NULL,
+    "file_size" INTEGER NOT NULL,
+    "mime_type" TEXT NOT NULL,
+    "order_index" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "material_files_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "material_permissions" (
+    "id" TEXT NOT NULL,
+    "material_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "can_view" BOOLEAN NOT NULL DEFAULT false,
+    "can_edit" BOOLEAN NOT NULL DEFAULT false,
+    "can_delete" BOOLEAN NOT NULL DEFAULT false,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "material_permissions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "material_history" (
+    "id" TEXT NOT NULL,
+    "material_id" TEXT NOT NULL,
+    "version" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "content" JSONB NOT NULL,
+    "changed_by" TEXT NOT NULL,
+    "change_type" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "material_history_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -235,6 +302,15 @@ CREATE TABLE "feedback" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "material_categories_name_key" ON "material_categories"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "material_permissions_material_id_user_id_key" ON "material_permissions"("material_id", "user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "material_history_material_id_version_key" ON "material_history"("material_id", "version");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "student_assignments_assignment_id_student_id_key" ON "student_assignments"("assignment_id", "student_id");
 
 -- CreateIndex
@@ -254,6 +330,21 @@ ALTER TABLE "materials" ADD CONSTRAINT "materials_class_id_fkey" FOREIGN KEY ("c
 
 -- AddForeignKey
 ALTER TABLE "materials" ADD CONSTRAINT "materials_teacher_id_fkey" FOREIGN KEY ("teacher_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "materials" ADD CONSTRAINT "materials_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "material_categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "material_files" ADD CONSTRAINT "material_files_material_id_fkey" FOREIGN KEY ("material_id") REFERENCES "materials"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "material_permissions" ADD CONSTRAINT "material_permissions_material_id_fkey" FOREIGN KEY ("material_id") REFERENCES "materials"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "material_permissions" ADD CONSTRAINT "material_permissions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "material_history" ADD CONSTRAINT "material_history_material_id_fkey" FOREIGN KEY ("material_id") REFERENCES "materials"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "material_content" ADD CONSTRAINT "material_content_material_id_fkey" FOREIGN KEY ("material_id") REFERENCES "materials"("id") ON DELETE CASCADE ON UPDATE CASCADE;
